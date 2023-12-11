@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Routines | FitLog</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+        <h1>Routine Management</h1>
+
+        <!-- Section for Creating New Routine -->
+        <div class="form-container">
+            <div class="form-section">
+                <h2>Create New Routine</h2>
+                <form method="POST" action="/routines">
+                    <div class="form-group">
+                        <label for="routine_name">Routine Name:</label>
+                        <input type="text" id="routine_name" name="routine_name" placeholder="Enter Routine Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exercises">Select Exercises:</label>
+                        <select id="exercises" name="exercises" multiple required>
+                            {% for exercise in exercises %}
+                            <option value="{{ exercise.exercise_id }}">{{ exercise.exercise_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit">Create Routine</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Section to Display Existing Routines -->
+        <div class="form-container">
+            <div class="form-section">
+                <h2>Existing Routines</h2>
+                <ul>
+                    {% for routine in routines %}
+                    <li>{{ routine.routine_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
