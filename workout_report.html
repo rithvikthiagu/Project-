@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workout Log Report | FitLog</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    <h1>Workout Log Report</h1>
+    
+    <!-- Filter Options -->
+    <form method="POST" action="{{ url_for('workout_log_report') }}">
+        <h2>Filter Options</h2>
+        
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+        
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">   
+        
+        <label for="sets">Sets:</label>
+        <input type="text" id="sets" name="sets">
+        
+        <label for="reps">Reps:</label>
+        <input type="text" id="reps" name="reps">
+        
+        <label for="weight">Weight:</label>
+        <input type="text" id="weight" name="weight">
+        
+        <label for="distance">Distance:</label>
+        <input type="text" id="distance" name="distance">
+        
+        <label for="time">Time:</label>
+        <input type="text" id="time" name="time">
+        
+        <button type="submit">Apply Filters</button>
+    </form>
+    
+    <!-- Display the filtered log entries in a table -->
+    {% if filtered_logs %}
+    <h2>Filtered Workout Log Entries</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Sets</th>
+                <th>Reps</th>
+                <th>Weight</th>
+                <th>Distance</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in filtered_logs %}
+                <tr>
+                    <td>{{ log.date }}</td>
+                    <td>{{ log.sets }}</td>
+                    <td>{{ log.reps }}</td>
+                    <td>{{ log.weight }}</td>
+                    <td>{{ log.distance }}</td>
+                    <td>{{ log.time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    
+    <!-- Display average statistics -->
+    {% if average_time is not none or average_sets is not none or average_reps is not none or average_weight is not none or average_distance is not none %}
+    <h2>Average Statistics</h2>
+    <div>
+        {% if average_time is not none %}
+            <p>Average Time: {{ average_time }} minutes</p>
+        {% endif %}
+        {% if average_sets is not none %}
+            <p>Average Sets: {{ average_sets }}</p>
+        {% endif %}
+        {% if average_reps is not none %}
+            <p>Average Reps: {{ average_reps }}</p>
+        {% endif %}
+        {% if average_weight is not none %}
+            <p>Average Weight Lifted: {{ average_weight }} lbs</p>
+        {% endif %}
+        {% if average_distance is not none %}
+            <p>Average Distance: {{ average_distance }} miles</p>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+</html>
