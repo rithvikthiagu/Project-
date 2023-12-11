@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | FitLog</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>FitLog Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="/exercises">Exercises</a></li>
+                <li><a href="/routines">Routines</a></li>
+                <li><a href="/workout_log">Workout Log</a></li>
+                <li><a href="{{ url_for('workout_log_report') }}">Workout Report</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
