@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercises | FitLog</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Ensure this path is correct for your CSS file -->
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+        <h1>Exercise Management</h1>
+
+        <!-- Section for Adding New Exercise -->
+        <div class="form-container">
+            <div class="form-section">
+                <h2>Add New Exercise</h2>
+                <form method="POST" action="/exercises">
+                    <div class="form-group">
+                        <label for="exercise_name">Exercise Name:</label>
+                        <input type="text" id="exercise_name" name="exercise_name" placeholder="Enter Exercise Name" required>
+                    </div>
+                    <button type="submit">Add Exercise</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Section to Display Existing Exercises -->
+        <div class="form-container">
+            <div class="form-section">
+                <h2>Existing Exercises</h2>
+                <ul>
+                    {% for exercise in exercises %}
+                    <li>{{ exercise.exercise_name }}</li>
+                    <!-- Optionally add a delete button for each exercise -->
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
